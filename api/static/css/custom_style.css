@@ -1,0 +1,5 @@
+/* custom_style.css */
+.accent-warning {
+    background-color: #B8860B !important; /* Amarillo oscuro */
+    border-color: #B8860B !important;
+}
