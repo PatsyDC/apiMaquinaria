@@ -13,7 +13,7 @@ urlpatterns = [
     path('maquinas/<int:pk>', MaquinaRetrieveUpdateDestroyView.as_view(), name='maquinaid'),
     path('publicaciones/', PublicacionListCreateView.as_view(), name='publicaciones'),
     path('publicaciones/<int:pk>', PublicacionRetrieveUpdateDestroyView.as_view(), name='publicacionesid'),
-    path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

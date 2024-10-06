@@ -18,15 +18,15 @@ class EjemploSerializer(serializers.ModelSerializer):
         model = PrimerEjemplo
         fields = ['id', 'descripcion', 'img', 'user', 'comentarios']  # Asegúrate de incluir 'comentarios'
 
-class CategoriasSerializer(serializers.Serializer):
+class CategoriasSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categorias
-        filter = '__all__'
+        fields= '__all__'
 
-class MaquinaSerializer(serializers.Serializer):
+class MaquinaSerializer(serializers.ModelSerializer): 
     class Meta:
         model = Maquina
-        filter = '__all__'
+        fields = '__all__' 
 
 class PublicacionSerializer(serializers.Serializer):
     class Meta:

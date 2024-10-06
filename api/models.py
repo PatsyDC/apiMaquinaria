@@ -42,7 +42,7 @@ class Maquina(models.Model):
     categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
     img = models.ImageField(upload_to='api/images/')
     prefix = models.CharField(max_length=150)
-    url_doc = models.CharField(max_length=800)
+    pdf_file = models.FileField(upload_to='api/pdfs/', null=True, blank=True)
 
     class Meta:
         verbose_name_plural = ('Máquinas')
