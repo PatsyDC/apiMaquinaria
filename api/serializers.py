@@ -28,9 +28,9 @@ class MaquinaSerializer(serializers.ModelSerializer):
         model = Maquina
         fields = '__all__' 
 
-class PublicacionSerializer(serializers.Serializer):
+class PublicacionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Publicacion
-        filter = '__all__'
+        fields = '__all__'
 
 
