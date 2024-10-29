@@ -19,14 +19,6 @@ class PrimerEjemplo(models.Model):
     def __str__(self):
         return f'{self.user.username}'
 
-class Comentario(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_comentarios')
-    primer_ejemplo = models.ForeignKey(PrimerEjemplo, on_delete=models.CASCADE, related_name='comentarios', null=True, blank=True)
-    texto = models.TextField()
-
-    def __str__(self):
-        return f'{self.user.username}'
-
 class Categorias(models.Model):
     categoria = models.CharField(max_length=150)
     descripcion = models.CharField(max_length=350)
@@ -60,5 +52,13 @@ class Publicacion(models.Model):
 
     def __str__(self):
         return f'{self.user}'
+
+class Comentario(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_comentarios')
+    publicacion = models.ForeignKey(Publicacion, on_delete=models.CASCADE, related_name='comentarios', null=True, blank=True)
+    texto = models.TextField()
+
+    def __str__(self):
+        return f'{self.user.username}'
 
 

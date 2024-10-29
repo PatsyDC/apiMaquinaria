@@ -47,25 +47,20 @@ class CustomTokenObtainPairView(APIView):
         else:
             return Response({'error': 'Credenciales inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
 
+
+class UserDetailView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    
 #ejemplo
 
-class EjemploListCreateView(generics.ListCreateAPIView):
-    queryset = PrimerEjemplo.objects.all()
-    serializer_class = EjemploSerializer
+# class EjemploListCreateView(generics.ListCreateAPIView):
+#     queryset = PrimerEjemplo.objects.all()
+#     serializer_class = EjemploSerializer
 
-class EjemploRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = PrimerEjemplo.objects.all()
-    serializer_class = EjemploSerializer
-
-#comentarios 
-
-class ComentariosListCreateView(generics.ListCreateAPIView):
-    queryset = Comentario.objects.all()
-    serializer_class = ComentariosSerializer
-
-class ComentariosRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Comentario.objects.all()
-    serializer_class = ComentariosSerializer
+# class EjemploRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = PrimerEjemplo.objects.all()
+#     serializer_class = EjemploSerializer
 
 ############### CATEGORIAS ##############
 class CategoriasListCreateView(generics.ListCreateAPIView):
@@ -94,3 +89,13 @@ class PublicacionListCreateView(generics.ListCreateAPIView):
 class PublicacionRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Publicacion.objects.all()
     serializer_class = PublicacionSerializer
+
+#comentarios 
+
+class ComentariosListCreateView(generics.ListCreateAPIView):
+    queryset = Comentario.objects.all()
+    serializer_class = ComentariosSerializer
+
+class ComentariosRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comentario.objects.all()
+    serializer_class = ComentariosSerializer
