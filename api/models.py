@@ -35,6 +35,9 @@ class Maquina(models.Model):
     img = models.ImageField(upload_to='api/images/')
     prefix = models.CharField(max_length=150)
     pdf_file = models.FileField(upload_to='api/pdfs/', null=True, blank=True)
+    pdf_plano_electrico = models.FileField(upload_to='api/pdfs/', null=True, blank=True)
+    pdf_plano_hidraulico = models.FileField(upload_to='api/pdfs/', null=True, blank=True)
+    pdf_especificaciones_tecnicas = models.FileField(upload_to='api/pdfs/', null=True, blank=True)
 
     class Meta:
         verbose_name_plural = ('Máquinas')

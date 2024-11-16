@@ -163,17 +163,17 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = {
-    "site_title": "Tecnologycal Machine",
+    "site_title": "Connected by Machine",
 
-    "site_header": "Tecnologycal Machine",
+    "site_header": "Connected by Machine",
 
-    "site_logo": "logo/logo_sin.png",
+    "site_logo": "logo/logo_c.png",
 
     "site_logo_classes": "img-circle",
 
-    "site_icon": "logo/logo_sin.png",
+    "site_icon": "logo/logo_c.png",
 
-    "welcome_sign": "Bienvenido a Tecnologycal Machine",
+    "welcome_sign": "Bienvenido a Connected by Machine",
 
     "copyright": "Acme Library Ltd",
 
@@ -197,7 +197,7 @@ JAZZMIN_SETTINGS = {
         {"model": "auth.user"}
     ],
 
-    "site_brand": "Tecno. Machine",
+    "site_brand": "C. Machine",
 
     "show_sidebar": True,
 
