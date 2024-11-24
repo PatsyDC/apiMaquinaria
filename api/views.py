@@ -70,6 +70,22 @@ class UserRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', True)  # Permite actualizaciones parciales
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
+    
+    def perform_update(self, serializer):
+        instance = serializer.save()
+        # Si se proporciona una contraseña nueva, se configura correctamente
+        if 'password' in serializer.validated_data:
+            instance.set_password(serializer.validated_data['password'])
+            instance.save()
+
+
 ############### CATEGORIAS ##############
 class CategoriasListCreateView(generics.ListCreateAPIView):
     queryset = Categorias.objects.all()
