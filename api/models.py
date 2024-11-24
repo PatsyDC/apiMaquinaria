@@ -64,4 +64,10 @@ class Comentario(models.Model):
     def __str__(self):
         return f'{self.user.username}'
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    profile_image = models.ImageField(upload_to='api/images/', null=True, blank=True)
+    cover_image = models.ImageField(upload_to='api/images/', null=True, blank=True)
 
+    def __str__(self):
+        return self.user.username

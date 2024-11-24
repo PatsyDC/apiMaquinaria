@@ -13,7 +13,10 @@ urlpatterns = [
     path('publicaciones/<int:pk>', PublicacionRetrieveUpdateDestroyView.as_view(), name='publicacionesid'),
     path('token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('user/<int:pk>/', UserDetailView.as_view(), name='user-detail'),
-    path('register/', RegisterView.as_view(), name='register')
+    path('userE/<int:pk>/', UserRetrieveUpdateDestroyView.as_view(), name='user-detail'),
+    path('register/', RegisterView.as_view(), name='register'),
+    path('fotos/', UserProfileListCreateView.as_view(), name='foto'),
+    path('fotos/<int:pk>/', UserProfileRetrieveUpdateDestroyView.as_view(), name='foto')
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -62,20 +62,13 @@ class RegisterView(generics.CreateAPIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class UserDetailView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    
-#ejemplo
 
-# class EjemploListCreateView(generics.ListCreateAPIView):
-#     queryset = PrimerEjemplo.objects.all()
-#     serializer_class = EjemploSerializer
-
-# class EjemploRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = PrimerEjemplo.objects.all()
-#     serializer_class = EjemploSerializer
+class UserRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 ############### CATEGORIAS ##############
 class CategoriasListCreateView(generics.ListCreateAPIView):
@@ -114,3 +107,13 @@ class ComentariosListCreateView(generics.ListCreateAPIView):
 class ComentariosRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comentario.objects.all()
     serializer_class = ComentariosSerializer
+
+#### foto perfil - portada ##############
+
+class UserProfileListCreateView(generics.ListCreateAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+
+class UserProfileRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer

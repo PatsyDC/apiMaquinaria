@@ -8,13 +8,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
-# class EjemploSerializer(serializers.ModelSerializer):
-#     comentarios = ComentariosSerializer(many=True, read_only=True)  # Agrega esta línea para incluir los comentarios
-
-#     class Meta:
-#         model = PrimerEjemplo
-#         fields = ['id', 'descripcion', 'img', 'user', 'comentarios']  # Asegúrate de incluir 'comentarios'
-
 class CategoriasSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categorias
@@ -61,4 +54,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
-
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = '__all__' 
