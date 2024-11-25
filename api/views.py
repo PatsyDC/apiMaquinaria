@@ -114,6 +114,12 @@ class PublicacionRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView
     queryset = Publicacion.objects.all()
     serializer_class = PublicacionSerializer
 
+    # Permitimos actualizaciones parciales (sin requerir todos los campos)
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)  # Esto permite actualizaciones parciales
+        return super().update(request, *args, **kwargs)
+
+
 #comentarios 
 
 class ComentariosListCreateView(generics.ListCreateAPIView):

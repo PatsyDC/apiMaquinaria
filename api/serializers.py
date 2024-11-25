@@ -31,7 +31,21 @@ class PublicacionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Publicacion
-        fields =  ['id', 'descripcion', 'img', 'user', 'comentarios']
+        fields = ['id', 'descripcion', 'img', 'user', 'comentarios']
+
+    def update(self, instance, validated_data):
+        # Actualizar la descripción si se pasa
+        descripcion = validated_data.get('descripcion', instance.descripcion)
+        instance.descripcion = descripcion
+
+        # Solo actualizar la imagen si se pasa una nueva
+        img = validated_data.get('img', None)
+        if img is not None:  # Si la imagen no es None, la actualizamos
+            instance.img = img
+
+        # Guardar la instancia después de actualizar
+        instance.save()
+        return instance
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
