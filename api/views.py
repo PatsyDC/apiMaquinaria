@@ -1,3 +1,6 @@
+import os
+from django.core.files import File
+from django.conf import settings
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -54,14 +57,36 @@ class RegisterView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
+            # Crear el usuario
             user = serializer.save()
-            return Response({
-                "user": serializer.data,
-                "message": "Usuario creado exitosamente"
-            }, status=status.HTTP_201_CREATED)
+
+            # Ruta de las imágenes predeterminadas
+            profile_image_path = os.path.join(settings.MEDIA_ROOT, 'api/images/icon-userd.png')
+            cover_image_path = os.path.join(settings.MEDIA_ROOT, 'api/images/fondo_portada.avif')
+
+            # Verificar si las imágenes existen en el sistema de archivos
+            if os.path.exists(profile_image_path) and os.path.exists(cover_image_path):
+                # Abrir las imágenes como archivos
+                with open(profile_image_path, 'rb') as profile_file, open(cover_image_path, 'rb') as cover_file:
+                    # Crear el perfil del usuario con las imágenes predeterminadas
+                    user_profile = UserProfile.objects.create(
+                        user=user,
+                        profile_image=File(profile_file, name='icon-userd.png'),
+                        cover_image=File(cover_file, name='fondo_portada.avif')
+                    )
+
+                return Response({
+                    "user": serializer.data,
+                    "profile_created": True,
+                    "message": "Usuario creado exitosamente con perfil y fotos por defecto."
+                }, status=status.HTTP_201_CREATED)
+            else:
+                return Response({
+                    "error": "Las imágenes predeterminadas no se encuentran en la ruta especificada."
+                }, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+            
 class UserDetailView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
