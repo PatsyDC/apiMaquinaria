@@ -85,7 +85,6 @@ class UserRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
             instance.set_password(serializer.validated_data['password'])
             instance.save()
 
-
 ############### CATEGORIAS ##############
 class CategoriasListCreateView(generics.ListCreateAPIView):
     queryset = Categorias.objects.all()
@@ -119,7 +118,6 @@ class PublicacionRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView
         partial = kwargs.pop('partial', False)  # Esto permite actualizaciones parciales
         return super().update(request, *args, **kwargs)
 
-
 #comentarios 
 
 class ComentariosListCreateView(generics.ListCreateAPIView):
@@ -130,12 +128,22 @@ class ComentariosRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView
     queryset = Comentario.objects.all()
     serializer_class = ComentariosSerializer
 
-#### foto perfil - portada ##############
 
+# Vista para listar y crear el perfil de usuario
 class UserProfileListCreateView(generics.ListCreateAPIView):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
 
+    def get_queryset(self):
+        # Aquí no necesitamos 'user_id' en la URL
+        return UserProfile.objects.all()  # Devuelve todos los perfiles
+
+# Vista para recuperar, actualizar y eliminar el perfil de usuario
 class UserProfileRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
+
+    def get_object(self):
+        user_id = self.kwargs['user_id']
+        return UserProfile.objects.get(user__id=user_id)
+
