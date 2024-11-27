@@ -86,7 +86,7 @@ class RegisterView(generics.CreateAPIView):
                 }, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-            
+
 class UserDetailView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -152,7 +152,6 @@ class ComentariosListCreateView(generics.ListCreateAPIView):
 class ComentariosRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comentario.objects.all()
     serializer_class = ComentariosSerializer
-
 
 # Vista para listar y crear el perfil de usuario
 class UserProfileListCreateView(generics.ListCreateAPIView):

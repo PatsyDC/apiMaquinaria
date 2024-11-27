@@ -28,6 +28,7 @@ class ComentariosSerializer(serializers.ModelSerializer):
 
 class PublicacionSerializer(serializers.ModelSerializer):
     comentarios = ComentariosSerializer(many=True, read_only=True)
+    img = serializers.ImageField(required=False, allow_null=True) #sirve para el editar 
 
     class Meta:
         model = Publicacion
@@ -72,6 +73,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    profile_image = serializers.ImageField(required=False, allow_null=True)
+    cover_image = serializers.ImageField(required=False, allow_null=True)
+
     class Meta:
         model = UserProfile
-        fields = '__all__' 
+        fields = '__all__'
